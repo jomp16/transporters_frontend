@@ -1,19 +1,87 @@
+<app-navbar></app-navbar>
 <div class="container">
-    <form [formGroup]="transporterFormGroup" (ngSubmit)="onSubmit(transporterFormGroup.value)">
+  <h1 class="text-center">Cadastrando uma Transportadora</h1>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <form [formGroup]="transporterFormGroup" (ngSubmit)="onSubmit(transporterFormGroup.value)">
         <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
-                placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite o e-mail">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="cnpj">CNPJ</label>
+          <input type="cnpj" class="form-control" id="cnpj" formControlName="cnpj" placeholder="Digite o CNPJ">
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="name" class="form-control" id="name" formControlName="name" placeholder="Digite o nome">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <div class="form-group">
+          <label for="company">Empresa</label>
+          <input type="company" class="form-control" id="company" formControlName="company"
+                 placeholder="Digite o nome da empresa">
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Telefone</label>
+          <input type="phoneNumber" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                 placeholder="Digite o telefone">
+        </div>
+        <div class="form-group">
+          <label for="mobileNumber">Celular</label>
+          <input type="mobileNumber" class="form-control" id="mobileNumber" formControlName="mobileNumber"
+                 placeholder="Digite o celular">
+        </div>
+        <div class="form-group">
+          <label for="whatsappNumber">WhatsApp</label>
+          <input type="whatsappNumber" class="form-control" id="whatsappNumber" formControlName="whatsappNumber"
+                 placeholder="Digite o WhatsApp">
+        </div>
+        <div class="form-group">
+          <label for="modal">Modal</label>
+          <input type="modal" class="form-control" id="modal" formControlName="modal" placeholder="Selecione o modal">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="cep">CEP</label>
+            <input type="cep" class="form-control" id="cep" formControlName="cep" placeholder="Digite o Estado">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="state">Estado</label>
+            <input type="state" class="form-control" id="state" formControlName="state"
+                   placeholder="Selecione o Estado">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="city">Cidade</label>
+          <input type="city" class="form-control" id="city" formControlName="city"
+                 placeholder="Digite a cidade">
+        </div>
+        <div class="form-group">
+          <label for="district">Bairro</label>
+          <input type="district" class="form-control" id="district" formControlName="district"
+                 placeholder="Digite o bairro">
+        </div>
+        <div class="form-group">
+          <label for="street">Rua / Avenida</label>
+          <input type="street" class="form-control" id="street" formControlName="street"
+                 placeholder="Digite a rua / avenida">
+        </div>
+        <div class="form-group">
+          <label for="streetNumber">Número</label>
+          <input type="streetNumber" class="form-control" id="streetNumber" formControlName="streetNumber"
+                 placeholder="Digite o número">
+        </div>
+        <div class="form-group" *ngIf="transporterFormGroup.controls['id'].value === 0">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="servicesAccepted"
+                   [ngModelOptions]="{standalone: true}">
+            <label class="form-check-label" for="exampleCheck1">Eu aceito os termos de serviço</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Cadastrar-se agora!</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

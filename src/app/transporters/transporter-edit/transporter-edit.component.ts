@@ -10,25 +10,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ["./transporter-edit.component.css"]
 })
 export class TransporterEditComponent implements OnInit {
-  transporter: Transporter = new (class implements Transporter {
-    cep = "";
-    city = "";
-    cnpj = "";
-    company = "";
-    companyLogo = "";
-    district = "";
-    email = "";
-    id = 0;
-    mobileNumber = "";
-    modal: string[] = [];
-    name = "";
-    phoneNumber = "";
-    street = "";
-    streetNumber = "";
-    whatsappNumber = "";
-  })();
-
-  private transporterFormGroup: FormGroup;
+  transporterFormGroup: FormGroup;
+  servicesAccepted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,23 +20,24 @@ export class TransporterEditComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.route.params.subscribe(async params => {
+    this.transporterFormGroup = this.formBuilder.group(new Transporter());
+
+    await this.route.params.subscribe(async params => {
       const id = params.id;
 
       if (id !== undefined) {
-        this.transporter = await this.transportersService
+        const transporter = await this.transportersService
           .findTransporterById(id)
           .toPromise();
+
+        this.transporterFormGroup.patchValue(transporter);
       }
     });
-
-    this.transporterFormGroup = this.formBuilder.group(this.transporter);
   }
 
   async onSubmit(transporterData) {
-    this.transporter = transporterData;
     this.transporterFormGroup.reset();
 
-    console.warn("Your order has been submitted", this.transporter);
+    console.warn("Your order has been submitted", transporterData);
   }
 }
