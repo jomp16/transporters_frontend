@@ -99,7 +99,7 @@
               <div class="row">
                 <div class="col-3">
                   <h5 class="mt-3">
-                    <a class="underline" [routerLink]="['/transporters/edit/', transporter.id]">{{ transporter.name }}</a>
+                    <a class="underline" [routerLink]="['/transporters/edit/', transporter.id]">{{ transporter.name.trim() === '' ? 'Sem nome' : transporter.name }}</a>
                   </h5>
                   <h5 class="mt-0">
                     {{ transporter.cnpj | mask: '00.000.000/0000-00' }}

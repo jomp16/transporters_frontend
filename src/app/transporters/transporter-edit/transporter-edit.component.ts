@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TransportersService} from 'src/app/services/transporters.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CepService} from '../../services/cep.service';
+import {applySourceSpanToExpressionIfNeeded} from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-transporter-edit',
@@ -15,7 +16,7 @@ export class TransporterEditComponent implements OnInit {
   servicesAccepted = false;
   private cepAtual = '';
 
-  imageError: string;
+  imageError: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -105,19 +106,20 @@ export class TransporterEditComponent implements OnInit {
     this.imageError = null;
     if (fileInput.target.files && fileInput.target.files[0]) {
       // Size Filter Bytes
-      const maxSize = 20971520;
+      const maxSize = 262144;
       const allowedTypes = ['image/png', 'image/jpeg'];
       const maxHeight = 15200;
       const maxWidth = 25600;
 
+      console.log(fileInput.target.files[0].size);
       if (fileInput.target.files[0].size > maxSize) {
-        this.imageError = 'Maximum size allowed is ' + maxSize / 1000 + 'Mb';
+        this.imageError = 'O tamanho máximo da imagem é ' + maxSize / 1000000 + 'MB.';
 
         return false;
       }
 
       if (!allowedTypes.includes(fileInput.target.files[0].type)) {
-        this.imageError = 'Only Images are allowed ( JPG | PNG )';
+        this.imageError = 'Somente imagens do tipo JPG e PNG são permitidas.';
         return false;
       }
 
@@ -125,21 +127,19 @@ export class TransporterEditComponent implements OnInit {
       reader.onload = (e: any) => {
         const image = new Image();
         image.src = e.target.result;
-        image.onload = rs => {
-          const target = rs.currentTarget as HTMLInputElement;
-          const imgHeight = target.height;
-          const imgWidth = target.width;
-
-          if (imgHeight > maxHeight && imgWidth > maxWidth) {
-            this.imageError = `Maximum dimentions allowed ${maxHeight}*${maxWidth}px`;
-            return false;
-          } else {
-            this.transporterFormGroup.controls.companyLogo.setValue(e.target.result);
-          }
+        image.onload = () => {
+          this.transporterFormGroup.controls.companyLogo.setValue(e.target.result);
         };
       };
 
       reader.readAsDataURL(fileInput.target.files[0]);
     }
+  }
+
+  trimInputName($event: any) {
+    const target = $event.target as HTMLInputElement;
+    const valueTrimmed = target.value.trim();
+
+    this.transporterFormGroup.controls.name.setValue(valueTrimmed);
   }
 }

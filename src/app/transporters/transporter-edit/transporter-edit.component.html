@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <form [formGroup]="transporterFormGroup" (ngSubmit)="onSubmit(transporterFormGroup.value)">
+          <div class="alert alert-danger" role="alert" *ngIf="imageError !== null">
+            {{ imageError }}
+          </div>
           <div class="col-4 form-group mx-auto fileInputLogoWrap">
             <input type="file" (change)="fileChangeEvent($event)" class="fileInputLogo"
                    accept="image/png,image/jpeg">
@@ -24,6 +27,7 @@
           <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite o nome"
+                   minlength="1" (keypress)="trimInputName($event)" (blur)="trimInputName($event)"
                    required="required">
           </div>
           <div class="form-group">
