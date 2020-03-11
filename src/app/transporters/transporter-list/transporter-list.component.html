@@ -1,0 +1,24 @@
+<div class="container">
+    <ul class="list-unstyled" *ngIf="transporters.length > 0; else elseBlock">
+        <li class="media rounded shadow transporter-media" *ngFor="let transporter of transporters">
+            <img src="data:image/png;base64,{{transporter.companyLogo}}" class="mr-3" alt="Transporter logo">
+            <div class="media-body">
+                <h5 class="mt-0">
+                    <a [routerLink]="['/transporters/edit/', transporter.id]">{{ transporter.name }}</a>
+                </h5>
+                <h5 class="mt-0">
+                    {{transporter.cnpj}}
+                </h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio,
+                vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
+                Donec
+                lacinia congue felis in faucibus.
+            </div>
+        </li>
+    </ul>
+    <ng-template #elseBlock>
+        <h1 class="text-center">No transporters yet, why don't you <a routerLink="/transporters/new">register one</a>?
+        </h1>
+    </ng-template>
+</div>
