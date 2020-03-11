@@ -3,8 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transporter } from '../domain/transporter';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +29,7 @@ export class TransportersService {
     return this.http.put<Transporter>(`${this.url}/api/v1/transporters/update/${transporter.id}`, transporter);
   }
 
-  deleteTransporterById(id: bigint) {
-    this.http.delete(`${this.url}/api/v1/transporters/delete/${id}`);
+  deleteTransporterById(id: bigint): Observable<void> {
+    return this.http.delete<void>(`${this.url}/api/v1/transporters/delete/${id}`);
   }
 }

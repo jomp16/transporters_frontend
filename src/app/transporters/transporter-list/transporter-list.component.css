@@ -1,0 +1,32 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 68px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: sticky;
+}
+
+.badge-pointer {
+  cursor: pointer;
+}
+
+.lista-localizacao {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lista-localizacao > li {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+
+.underline {
+  text-decoration: underline;
+}

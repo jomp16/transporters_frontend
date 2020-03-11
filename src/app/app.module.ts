@@ -9,7 +9,11 @@ import {TransporterEditComponent} from './transporters/transporter-edit/transpor
 import {TransporterViewComponent} from './transporters/transporter-view/transporter-view.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxMaskModule, IConfig} from 'ngx-mask';
+import {NgBootstrapFormValidationModule} from 'ng-bootstrap-form-validation';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(options),
+    NgBootstrapFormValidationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.fileInputLogoWrap {
+  width: 100%;
+  height: auto;
+}
+
+.fileInputLogo {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  opacity: 0;
+}
+.fileInputLogo[disabled] + .img-space{
+  pointer-events: none;
+  cursor: not-allowed!important;
+}
